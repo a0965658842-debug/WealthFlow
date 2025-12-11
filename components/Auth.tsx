@@ -123,7 +123,7 @@ const Auth: React.FC<AuthProps> = ({ onLogin }) => {
         <div className="p-8">
           {!isFirebaseInitialized && (
             <div className="mb-6 bg-amber-50 border border-amber-200 text-amber-800 p-3 rounded-lg text-sm">
-              <strong>設定尚未完成：</strong> 系統偵測不到 Firebase 設定。請前往 GitHub Settings > Secrets 設定相關環境變數，並重新觸發 Deploy。
+              <strong>設定尚未完成：</strong> 系統偵測不到 Firebase 設定。請前往 GitHub Settings &rarr; Secrets 設定相關環境變數，並重新觸發 Deploy。
             </div>
           )}
 
