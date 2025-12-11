@@ -1,25 +1,11 @@
-
 import { GoogleGenAI } from "@google/genai";
 import { AppState } from "../types";
-import { getEnv } from "./utils";
 
-const apiKey = getEnv('API_KEY');
-
-// Initialize conditionally to avoid crashes if key is missing
-let ai: GoogleGenAI | null = null;
-if (apiKey) {
-  try {
-    ai = new GoogleGenAI({ apiKey });
-  } catch (e) {
-    console.error("Failed to initialize GoogleGenAI", e);
-  }
-}
+// The API key must be obtained exclusively from the environment variable process.env.API_KEY.
+// Assume this variable is pre-configured, valid, and accessible.
+const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 export const generateFinancialAdvice = async (data: AppState): Promise<string> => {
-  if (!apiKey || !ai) {
-    return "API Key 未設定，無法使用 AI 分析功能。請確認 GitHub Secrets 中已設定 API_KEY。";
-  }
-
   const summary = {
     totalBalance: data.accounts.reduce((sum, acc) => sum + acc.balance, 0),
     transactionCount: data.transactions.length,
