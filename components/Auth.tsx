@@ -26,6 +26,9 @@ const Auth: React.FC<AuthProps> = ({ onLogin }) => {
       case 'auth/user-not-found': return '找不到此帳號';
       case 'auth/wrong-password': return '密碼錯誤';
       case 'auth/invalid-credential': return '登入資訊錯誤';
+      case 'auth/api-key-not-valid.-please-pass-a-valid-api-key.':
+      case 'auth/api-key-not-valid': 
+        return '系統錯誤：API Key 無效。請檢查 GitHub Secrets 是否包含多餘的空格或引號。';
       default: return `發生錯誤 (${errorCode})`;
     }
   };
@@ -84,6 +87,11 @@ const Auth: React.FC<AuthProps> = ({ onLogin }) => {
     } catch (err: any) {
       console.error(err);
       setError(getErrorMessage(err.code || 'unknown'));
+      
+      // Special handling for api key error to guide the user
+      if (err.message && err.message.includes('api-key-not-valid')) {
+        setError(getErrorMessage('auth/api-key-not-valid'));
+      }
     } finally {
       setIsLoading(false);
     }
