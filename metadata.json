@@ -1,0 +1,5 @@
+{
+  "name": "WealthFlow Smart Finance",
+  "description": "A comprehensive personal finance and stock portfolio management application featuring bank account tracking, real-time simulated stock market updates, expense categorization, and AI-powered financial insights.",
+  "requestFramePermissions": []
+}
